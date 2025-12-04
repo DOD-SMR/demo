@@ -61,7 +61,7 @@ async function editarEnemigo(e) {
                 id: id,
                 nombre: nombre,
                 pais: pais,
-                afiliacion_politica: afiliacion
+                afiliacion: afiliacion
             })
         });
 
@@ -116,7 +116,7 @@ async function insertarEnemigo (e){
             body: JSON.stringify({
                 nombre: nombre,
                 pais: pais,
-                afiliacion_politica: afiliacion
+                afiliacion: afiliacion
             })
         });
         if(response.ok){
