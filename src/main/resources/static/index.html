@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIPAGINAWEB</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Tabla tablosa -><-->
+    <h1>
+        Lista de enemigos
+    </h1>
+    <table id="enemigosTable">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>pais</th>
+                <th>afiliacion</th>
+            </tr>
+        </thead>
+        <tbody id="enemigosBody">
+
+        </tbody>
+    </table>
+<!-- Formulario para insertar enemigos -><-->
+<div class="formulario">
+    <h2>Agregar Nuevo Enemigo</h2>
+    <form id="formInsertarEnemigo">
+        <div class="formGroup">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" name="nombre" required>
+        </div>
+        <div class="formGroup">
+            <label for="pais">Pais</label>
+            <input id="pais" type="text" name="pais" required>
+        </div>
+        <div class="formGroup">
+            <label for="afiliacion">Afiliacion</label>
+            <input id="afiliacion" type="text" name="afiliacion" required>
+        </div>
+        <button type="submit" id="btnSubmit">
+        Agregar Enemigo
+        </button>
+
+
+    </form>
+    <h2>Editar Nuevo Enemigo</h2>
+    <form id="formEditarEnemigo">
+        <div class="formGroup">
+            <label for="idE">ID Enemigo</label>
+            <input id="idE" type="text" name="idE" required>
+        </div>
+        <div class="formGroup">
+            <label for="nombre">Nombre</label>
+            <input id="nombreE" type="text" name="nombreE" required>
+        </div>
+        <div class="formGroup">
+            <label for="pais">Pais</label>
+            <input id="paisE" type="text" name="paisE" required>
+        </div>
+        <div class="formGroup">
+            <label for="afiliacion">Afiliacion</label>
+            <input id="afiliacionE" type="text" name="afiliacionE" required>
+            <button type="submit" id="btnEditar">
+                Editar Enemigo
+            </button>
+        </div>
+    </form>
+</div>
+
+</body>
+<script src="./script.js"></script>
+</html>
