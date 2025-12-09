@@ -5,7 +5,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,12 @@ import java.util.function.Function;
 Esto va a ser para las operaciones CRUD
  */
 @Repository
-public interface EnemigoRepository extends MongoRepository<Enemigo,String> {
+public interface EnemigoRepository extends JpaRepository<Enemigo,Long> {
     List<Enemigo> findByNombre(String nombre);
 
 
+    //consulta personalizada
+//    @Query('SELECT * FROM ENEMIGO')
+//    List<Enemigo> findEnemigosRojos(@Param('genero'));
 
 }
