@@ -19,7 +19,7 @@ public class EnemigoController {
         return  enemigoService.obtenerTodos();
     }
     @GetMapping("/enemigo/{id}")
-    public Enemigo obtenerEnemigo(@PathVariable Long id){
+    public Enemigo obtenerEnemigo(@PathVariable String id){
         return enemigoService.obtenerEnemigo(id);
     }
     @PostMapping("/enemigo")
@@ -27,7 +27,7 @@ public class EnemigoController {
         return enemigoService.guardar(enemigo);
     }
     @PutMapping("/enemigo/{id}")
-    public Enemigo editarEnemigo(@PathVariable Long id ,@RequestBody Enemigo e){
+    public Enemigo editarEnemigo(@PathVariable String id ,@RequestBody Enemigo e){
         return enemigoService.editarEnemigo(id,e);
     }
 
