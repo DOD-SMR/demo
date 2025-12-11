@@ -40,7 +40,9 @@ public class EnemigoService {
     public Enemigo guardar(Enemigo enemigo){
         return enemigoRepo.save(enemigo);
     }// fin post
-
+    public void eliminarEnemigo(Long id){
+        enemigoRepo.deleteById(id);
+    }
 
 
 }

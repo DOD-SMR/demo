@@ -36,7 +36,49 @@ function mostrarEnemigos(enemigos){
 
 document.getElementById('formInsertarEnemigo').addEventListener('submit',insertarEnemigo)
 document.getElementById('formEditarEnemigo').addEventListener('submit',editarEnemigo)
+document.getElementById('formEliminarEnemigo').addEventListener('submit',eliminarEnemigo)
+async function eliminarEnemigo(e){
+    e.preventDefault();
+    const id = document.getElementById('idEliminar').value
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Eliminando...';
+       try {
+            const response = await fetch(`api/enemigo/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                })
+            });
 
+
+            if (response.ok) {
+
+
+                // Resetear el formulario
+                document.getElementById('formEliminarEnemigo').reset();
+                console.log('Formulario reseteado'); // DEBUG
+
+                // Recargar la tabla
+                await cargarEnemigos();
+                console.log('Enemigos recargados'); // DEBUG
+
+            } else {
+                const error = await response.text();
+                console.error('Error del servidor:', error);
+
+            }
+        } catch(error) {
+            console.error('Error en catch:', error);
+
+        } finally {
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = 'Eliminar Enemigo';
+
+        }
+}
 async function editarEnemigo(e) {
     e.preventDefault();
 

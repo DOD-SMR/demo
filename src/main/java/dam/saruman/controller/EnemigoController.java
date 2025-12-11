@@ -30,6 +30,10 @@ public class EnemigoController {
     public Enemigo editarEnemigo(@PathVariable Long id ,@RequestBody Enemigo e){
         return enemigoService.editarEnemigo(id,e);
     }
+    @DeleteMapping("/enemigo/{id}")
+    public void eliminarEnemigo(@PathVariable Long id){
+        enemigoService.eliminarEnemigo(id);
+    }
 
 
 
