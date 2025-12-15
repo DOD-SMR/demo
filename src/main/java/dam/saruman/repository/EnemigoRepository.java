@@ -20,7 +20,4 @@ Esto va a ser para las operaciones CRUD
 @Repository
 public interface EnemigoRepository extends MongoRepository<Enemigo,String> {
     List<Enemigo> findByNombre(String nombre);
-
-
-
 }

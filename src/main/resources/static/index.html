@@ -8,22 +8,22 @@
 </head>
 <body>
 <!-- Tabla tablosa -><-->
-    <h1>
-        Lista de enemigos
-    </h1>
-    <table id="enemigosTable">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nombre</th>
-                <th>pais</th>
-                <th>afiliacion</th>
-            </tr>
-        </thead>
-        <tbody id="enemigosBody">
+<h1>
+    Lista de enemigos
+</h1>
+<table id="enemigosTable">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>nombre</th>
+        <th>pais</th>
+        <th>afiliacion</th>
+    </tr>
+    </thead>
+    <tbody id="enemigosBody">
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 <!-- Formulario para insertar enemigos -><-->
 <div class="formulario">
     <h2>Agregar Nuevo Enemigo</h2>
@@ -41,7 +41,7 @@
             <input id="afiliacion" type="text" name="afiliacion" required>
         </div>
         <button type="submit" id="btnSubmit">
-        Agregar Enemigo
+            Agregar Enemigo
         </button>
 
 
@@ -67,6 +67,17 @@
                 Editar Enemigo
             </button>
         </div>
+    </form>
+    <form id="formEliminarEnemigo">
+        <div class="formGroup">
+            <label for="idEliminar">ID Enemigo</label>
+            <input id="idEliminar" type="text" name="idEliminar" required>
+            <button type="submit" id="btnEliminar">
+                Eliminar Enemigo
+            </button>
+        </div>
+
+
     </form>
 </div>
 

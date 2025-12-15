@@ -3,6 +3,7 @@ package dam.saruman.controller;
 import dam.saruman.model.Enemigo;
 import dam.saruman.service.EnemigoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,10 @@ public class EnemigoController {
     @PutMapping("/enemigo/{id}")
     public Enemigo editarEnemigo(@PathVariable String id ,@RequestBody Enemigo e){
         return enemigoService.editarEnemigo(id,e);
+    }
+    @DeleteMapping("/enemigo/{id}")
+    public void eliminarEnemigo(@PathVariable String id){
+        enemigoService.eliminarEnemigo(id);
     }
 
 

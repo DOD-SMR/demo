@@ -1,9 +1,13 @@
 package dam.saruman.service;
 
+import dam.saruman.controller.EnemigoController;
 import dam.saruman.model.Enemigo;
 import dam.saruman.repository.EnemigoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -29,18 +33,31 @@ public class EnemigoService {
 
     }//fin get
     public Enemigo obtenerEnemigo(String id){
-        return this.obtenerTodos().stream().filter(enemigo -> enemigo.getId() == id).findFirst().get();
+        return enemigoRepo.findById(id).get();
     }
     public Enemigo editarEnemigo(String id, Enemigo enemigo){
-        this.obtenerEnemigo(id).setNombre(enemigo.getNombre());
-        this.obtenerEnemigo(id).setPais(enemigo.getPais());
-        this.obtenerEnemigo(id).setAfiliacion_politica(enemigo.getAfiliacion_politica());
-        return enemigoRepo.save(this.obtenerEnemigo(id));
+        Enemigo devuelto = this.obtenerEnemigo(id);
+        devuelto.setNombre(enemigo.getNombre());
+        devuelto.setPais(enemigo.getPais());
+        devuelto.setAfiliacion_politica(enemigo.getAfiliacion_politica());
+        return enemigoRepo.save(devuelto);
     }
     public Enemigo guardar(Enemigo enemigo){
-        return enemigoRepo.save(enemigo);
+        if (obtenerTodos().stream().anyMatch(enemigoLista -> enemigoLista.getNombre().equals(enemigo.getNombre()))){
+            throw new BadRequestException("Error al insertar, el nombre está repetido");
+        }else{
+            return enemigoRepo.save(enemigo);
+        }
+
     }// fin post
-
-
+    public void eliminarEnemigo(String id){
+        enemigoRepo.deleteById(id);
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public class BadRequestException extends RuntimeException {
+        public BadRequestException(String mensaje) {
+            super(mensaje);
+        }
+    }
 
 }
