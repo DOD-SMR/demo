@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIPAGINAWEB</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 <body>
 <!-- Tabla tablosa -><-->
@@ -24,6 +25,12 @@
 
     </tbody>
 </table>
+<button type="button" id="btnOrdenar" onclick="ordenarTabla()">
+    Ordenar tabla
+</button>
+<button type="button" id="btnDescarga" onclick="descargarTabla()">
+    Descargar csv
+</button>
 <!-- Formulario para insertar enemigos -><-->
 <div class="formulario">
     <h2>Agregar Nuevo Enemigo</h2>
@@ -76,9 +83,18 @@
                 Eliminar Enemigo
             </button>
         </div>
-
-
     </form>
+    <form id="formBusqueda" >
+        <div class="formGroup">
+            <label for="busqueda" id="labelBusqueda">
+                Buscar
+            </label>
+            <input type="text" id="busqueda" placeholder="Introduzca un nombre"/>
+            <button type="button" onclick="buscarEnemigo()" id="btnBuscar">Buscar</button>
+            <div id="enemigoBuscado"></div>
+        </div>
+    </form>
+
 </div>
 
 </body>

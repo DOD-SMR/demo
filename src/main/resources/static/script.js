@@ -1,18 +1,56 @@
+
+
 document.addEventListener('DOMContentLoaded',cargarEnemigos)
-
+datos = ""
 async function cargarEnemigos(){
-    try{
 
+    try{
         const response = await fetch('api/enemigo');
         const enemigos = await response.json();
+        datos = enemigos;
         mostrarEnemigos(enemigos);
 
     }catch(error){
         console.error("error al cargar usuarios");
+                alert(error.toString());
+
         console.log(error.toString())
     }//fin catch
 }//fin cargar enemigos
 
+function descargarTabla(){
+
+        const csv = Papa.unparse(datos);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'enemigos.csv';
+        link.click();
+
+}
+botonPulsado=false
+async function ordenarTabla(){
+        console.log(botonPulsado)
+        if(botonPulsado===false){
+            try{
+                        const response = await fetch('api/enemigo/ordenado');
+                        const enemigos = await response.json();
+                        datos = enemigos;
+                        mostrarEnemigos(enemigos);
+                    }catch(error){
+                        console.error("error al cargar usuarios");
+                                alert(error.toString());
+
+                        console.log(error.toString())
+                    }//fin catch
+            botonPulsado=true
+        }else{
+            cargarEnemigos();
+            botonPulsado=false
+        }
+
+
+}
 function mostrarEnemigos(enemigos){
 
     const tbody = document.getElementById('enemigosBody');
@@ -37,6 +75,45 @@ function mostrarEnemigos(enemigos){
 document.getElementById('formInsertarEnemigo').addEventListener('submit',insertarEnemigo)
 document.getElementById('formEditarEnemigo').addEventListener('submit',editarEnemigo)
 document.getElementById('formEliminarEnemigo').addEventListener('submit',eliminarEnemigo)
+document.getElementById('formBusqueda').addEventListener('submit',buscarEnemigo)
+
+async function buscarEnemigo(){
+                        nombre = document.getElementById("busqueda").value
+                        console.log(nombre)
+
+                        try{
+
+                            const response = await fetch(`/api/enemigo/obtenerEnemigo/${nombre}`);
+                            const enemigo = await response.json();
+                            const enemigoDiv = document.getElementById("enemigoBuscado");
+                                                                htmlEnemigo = `
+                                                                    <h2>Enemigo Encontrado</h2>
+                                                                    <p><strong>ID:</strong> ${enemigo.id}</p>
+                                                                    <p><strong>Nombre:</strong> ${enemigo.nombre}</p>
+                                                                    <p><strong>País:</strong> ${enemigo.pais}</p>
+                                                                    <p><strong>Afiliación política:</strong> ${enemigo.afiliacion_politica}</p>
+                                                                `;
+                            if(response.ok){
+
+
+                                    // Insertamos el HTML en la página
+                            }else{
+                                alert("Enemigo no encontrado, asegúrate de que el nombre es correcto")
+                                htmlEnemigo=`
+                                    <h2>Enemigo NO Encontrado</h2>
+
+                                `
+                            }
+                                                                enemigoDiv.innerHTML = htmlEnemigo;
+
+                        }catch(error){
+                            console.error("error al cargar usuarios");
+                            //alert(error.toString());
+                            console.log(error.toString())
+                        }//fin catch
+
+}
+
 async function eliminarEnemigo(e){
     e.preventDefault();
     const id = document.getElementById('idEliminar').value
@@ -67,6 +144,7 @@ async function eliminarEnemigo(e){
 
             } else {
                 const error = await response.text();
+                alert(error);
                 console.error('Error del servidor:', error);
 
             }
@@ -122,6 +200,8 @@ async function editarEnemigo(e) {
 
         } else {
             const error = await response.text();
+            alert(error);
+
             console.error('Error del servidor:', error);
 
         }
@@ -167,6 +247,7 @@ async function insertarEnemigo (e){
             await cargarEnemigos() //CARGAR LOS ENEMIGOS;
         }else{
                 const error = await response.text();
+                alert(error);
                 console.log(error);
         }
     }catch(error){

@@ -19,9 +19,17 @@ public class EnemigoController {
     public List<Enemigo> obtenerEnemigos(){
         return  enemigoService.obtenerTodos();
     }
+    @GetMapping("/enemigo/ordenado")
+    public List<Enemigo> obtenerEnemigosOrdenados(){
+        return  enemigoService.obtenerTodosOrdenados();
+    }
     @GetMapping("/enemigo/{id}")
     public Enemigo obtenerEnemigo(@PathVariable String id){
         return enemigoService.obtenerEnemigo(id);
+    }
+    @GetMapping("/enemigo/obtenerEnemigo/{nombre}")
+    public Enemigo obtenerEnemigoPorNombre(@PathVariable String nombre){
+        return enemigoService.obtenerEnemigoNombre(nombre);
     }
     @PostMapping("/enemigo")
     public Enemigo crearEnemigo(@RequestBody Enemigo enemigo){
